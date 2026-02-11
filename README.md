@@ -1,222 +1,182 @@
-📦 Supply Chain Analytics & Demand Prediction
-🚀 Project Overview
+# 📦 Supply Chain Analytics & Demand Prediction
 
-This project focuses on supply chain analytics and demand prediction using the Online Retail transactional dataset.
+## 🚀 Project Overview
+
+This project focuses on supply chain analytics and demand prediction using the Online Retail transactional dataset.  
 
 The objective is to:
 
-Extract meaningful product features using NLP
-
-Perform clustering on mixed-type retail data
-
-Predict product demand (Quantity)
-
-Support inventory planning and stock optimization
+- Extract meaningful product features using NLP  
+- Perform clustering on mixed-type retail data  
+- Predict product demand (Quantity)  
+- Support inventory planning and stock optimization  
 
 The pipeline combines Natural Language Processing, feature engineering, clustering, and machine learning models to analyze real-world ERP-style retail data.
 
-📊 Dataset
+---
+
+## 📊 Dataset
 
 Dataset: Online Retail Dataset (UK-based gift shop)
 
-Total records used: 50,000 transactions
+Total records used: 50,000 transactions  
 
-Attributes:
+### Attributes:
+- InvoiceNo  
+- StockCode  
+- Description  
+- Quantity  
+- InvoiceDate  
+- UnitPrice  
+- CustomerID  
+- Country  
 
-InvoiceNo
+---
 
-StockCode
+## 🧹 Data Preprocessing
 
-Description
+### Missing Value Handling
+- Removed rows with null values in `Description` and `CustomerID`.
 
-Quantity
-
-InvoiceDate
-
-UnitPrice
-
-CustomerID
-
-Country
-
-🧹 Data Preprocessing
-1️⃣ Missing Value Handling
-
-Removed rows with null values in Description and CustomerID.
-
-2️⃣ Text Processing on Product Description
-
-Used NLP techniques:
-
-Tokenization
-
-Stopword removal
-
-Lemmatization
-
-POS tagging
+### Text Processing on Product Description
+Applied NLP techniques:
+- Tokenization
+- Stopword removal
+- Lemmatization
+- POS tagging
 
 Extracted:
+- **Product Type** (nouns from description)
+- **Colour Type** (color detection from predefined list)
 
-Product Type (nouns from description)
+---
 
-Colour Type (color detection from predefined list)
+## 🏗 Feature Engineering
 
-🏗 Feature Engineering
-🟢 Revenue Feature
+### Revenue Feature
+```
 Revenue = Quantity × UnitPrice
-🟢 Date Features Extracted
+```
 
-From InvoiceDate:
-
-Year
-
-Month
-
-Day
-
-DayOfWeek
+### Date Features Extracted
+From `InvoiceDate`:
+- Year
+- Month
+- Day
+- DayOfWeek
 
 These features help capture seasonality and demand patterns.
 
-🔀 Encoding
+---
+
+## 🔀 Encoding
 
 Categorical variables encoded using:
+- Label Encoding
 
-Label Encoding
+Mixed data types handled appropriately for clustering.
 
-Mixed data types handled for clustering.
+---
 
-📌 Clustering – K-Prototypes
+## 📌 Clustering – K-Prototypes
 
-Since dataset contains both:
-
-Numerical features
-
-Categorical features
-
-We used K-Prototypes clustering to segment products.
+Since the dataset contains both numerical and categorical features, K-Prototypes clustering was used.
 
 Steps:
-
-Determined optimal K using cost curve
-
-Selected K = 3 clusters
-
-Assigned Cluster Number as a new feature
+1. Determined optimal K using cost curve
+2. Selected K = 3 clusters
+3. Assigned Cluster Number as a new feature
 
 This helps in grouping similar product transactions.
 
-🧠 Cluster Classification
+---
+
+## 🧠 Cluster Classification
 
 After generating clusters:
 
-Treated Cluster number as target
-
-Trained Linear SVC to classify new records into clusters
+- Treated `Cluster number` as target
+- Trained Linear SVC to classify new records into clusters
 
 Evaluation:
+- Accuracy score used for validation
 
-Accuracy score used for validation
+---
 
-📈 Demand Prediction
+## 📈 Demand Prediction
 
-Objective:
-Predict Quantity (product demand)
+Objective: Predict `Quantity` (product demand)
 
-Models Tested:
+### Models Tested:
+- Random Forest
+- KNN
+- SVC
+- AdaBoost
+- Logistic Regression
+- Naive Bayes
+- Decision Tree
+- Gradient Boosting
 
-Random Forest
-
-KNN
-
-SVC
-
-AdaBoost
-
-Logistic Regression
-
-Naive Bayes
-
-Decision Tree
-
-Gradient Boosting
-
-Best Performing Model:
-
+### Best Performing Model:
 Random Forest
 
 Evaluation Metrics:
+- Accuracy
+- F1 Score
 
-Accuracy
+---
 
-F1 Score
+## 🛠 Technologies Used
 
-🛠 Technologies Used
+- Python
+- Pandas
+- NumPy
+- NLTK
+- Scikit-learn
+- KPrototypes (kmodes)
+- Matplotlib
 
-Python
+---
 
-Pandas
+## 🧩 Project Pipeline
 
-NumPy
+1. Data Cleaning  
+2. NLP-based Feature Extraction  
+3. Revenue & Time Feature Engineering  
+4. Mixed-type Clustering (K-Prototypes)  
+5. Cluster Classification  
+6. Demand Prediction using ML models  
+7. Model Evaluation  
 
-NLTK
+---
 
-Scikit-learn
-
-KPrototypes (kmodes)
-
-Matplotlib
-
-🧩 Project Pipeline
-
-Data Cleaning
-
-NLP-based Feature Extraction
-
-Revenue & Time Feature Engineering
-
-Mixed-type Clustering (K-Prototypes)
-
-Cluster Classification
-
-Demand Prediction using ML models
-
-Model Evaluation
-
-🎯 Business Impact
+## 🎯 Business Impact
 
 This project demonstrates how machine learning can support:
 
-Inventory Planning
-
-Product Segmentation
-
-Demand Forecasting
-
-Supply Chain Optimization
-
-Stock Management
+- Inventory Planning  
+- Product Segmentation  
+- Demand Forecasting  
+- Supply Chain Optimization  
+- Stock Management  
 
 The approach can be extended to:
+- Stock-out risk prediction  
+- Vendor performance analysis  
+- Procurement intelligence  
 
-Stock-out risk prediction
+---
 
-Vendor performance analysis
+## 📌 Future Improvements
 
-Procurement intelligence
+- Convert demand prediction to regression-based forecasting  
+- Implement time-series forecasting (ARIMA, XGBoost, LSTM)  
+- Use business-focused metrics (MAE, RMSE, MAPE)  
+- Deploy model via API for real-time prediction  
 
-📌 Future Improvements
+---
 
-Convert demand prediction to regression-based forecasting
+## 👨‍💻 Author
 
-Implement time-series forecasting (ARIMA, XGBoost, LSTM)
-
-Use business-focused metrics (MAE, RMSE, MAPE)
-
-Deploy model via API for real-time prediction
-
-👨‍💻 Author
-
-Santosh Kuruventi
+Santosh Kuruventi  
 Machine Learning & Supply Chain Analytics Enthusiast
